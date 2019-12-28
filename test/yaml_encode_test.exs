@@ -63,6 +63,47 @@ defmodule YamlEncodeTest do
              YamlEncode.encode(map)
   end
 
+  test "list of maps" do
+    maps = [
+      %{"test" => [1, 2, 3, 4]},
+      %{"testing" => "test"}
+    ]
+
+    assert {:ok,
+            """
+            ---
+            test:
+              - 1
+              - 2
+              - 3
+              - 4
+            ---
+            testing: test\
+            """} ==
+             YamlEncode.encode(maps)
+  end
+
+  test "invalid yaml" do
+    map = %{
+      "function" => fn -> nil end
+    }
+
+    assert {:error, _e} = YamlEncode.encode(map)
+  end
+
+  test "invalid yamls" do
+    maps = [
+      %{
+        "function" => fn -> nil end
+      },
+      %{
+        "function" => fn -> nil end
+      }
+    ]
+
+    assert {:error, _e} = YamlEncode.encode(maps)
+  end
+
   test "real world, random json" do
     map = %{
       "_id" => "5e077e7f669d76b1422aff45",

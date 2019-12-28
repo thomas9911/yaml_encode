@@ -7,9 +7,11 @@ defmodule YamlEncode.MixProject do
       version: "0.1.0",
       elixir: ">= 1.6.0",
       start_permanent: Mix.env() == :prod,
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [coveralls: :test, "coveralls.html": :test],
       deps: deps(),
       source_url: "https://github.com/thomas9911/yaml_encode",
-      package: package(),
+      package: package()
     ]
   end
 
@@ -22,7 +24,8 @@ defmodule YamlEncode.MixProject do
   defp deps do
     [
       {:yaml_elixir, "~> 2.4", only: :dev},
-      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 

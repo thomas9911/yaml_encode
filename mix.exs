@@ -11,7 +11,12 @@ defmodule YamlEncode.MixProject do
       preferred_cli_env: [coveralls: :test, "coveralls.html": :test],
       deps: deps(),
       source_url: "https://github.com/thomas9911/yaml_encode",
-      package: package()
+      package: package(),
+      name: "YamlEncode",
+      docs: [
+        main: "YamlEncode",
+        extra_section: []
+      ]
     ]
   end
 

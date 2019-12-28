@@ -1,5 +1,7 @@
 defmodule YamlEncode.Quoter do
-  # link: https://github.com/chyh1990/yaml-rust/blob/360a34d75bb64357cfdbc5bb706bcde9a0ecbc23/src/emitter.rs#L296
+  @moduledoc """
+  Module to determine if a string needs to be quoted or not. Based on https://github.com/chyh1990/yaml-rust/
+  """
 
   @reserved_keys [
     # boolean
@@ -86,6 +88,10 @@ defmodule YamlEncode.Quoter do
     "."
   ]
 
+  @doc """
+  Determines if a string needed to be quoted
+  """
+  @spec quotes?(binary) :: boolean
   def quotes?(binary) when is_binary(binary) do
     reducer(
       [
@@ -102,6 +108,10 @@ defmodule YamlEncode.Quoter do
     )
   end
 
+  @doc """
+  binary is an integer
+  """
+  @spec integer?(binary) :: boolean
   def integer?(binary) do
     case Integer.parse(binary, 10) do
       {_, ""} -> true
@@ -110,6 +120,10 @@ defmodule YamlEncode.Quoter do
     end
   end
 
+  @doc """
+  binary is a float
+  """
+  @spec float?(binary) :: boolean
   def float?(binary) do
     case Float.parse(binary) do
       {_, ""} -> true
@@ -118,6 +132,10 @@ defmodule YamlEncode.Quoter do
     end
   end
 
+  @doc """
+  binary is in a date format
+  """
+  @spec date?(binary) :: boolean
   def date?(binary) do
     case Date.from_iso8601(binary) do
       {:ok, _} -> true
@@ -125,6 +143,10 @@ defmodule YamlEncode.Quoter do
     end
   end
 
+  @doc """
+  binary starts with specific character
+  """
+  @spec starts_with_specific_char?(binary) :: boolean
   def starts_with_specific_char?(binary)
       when binary_part(binary, 0, 1) in @invalid_start_chars do
     true
@@ -132,26 +154,43 @@ defmodule YamlEncode.Quoter do
 
   def starts_with_specific_char?(_), do: false
 
+  @doc """
+  binary ends with specific character
+  """
+  @spec ends_with_specific_char?(binary) :: boolean
   def ends_with_specific_char?(binary) do
     pattern = [" "]
 
     String.ends_with?(binary, pattern)
   end
 
+  @doc """
+  binary start with a group of binaries
+  """
+  @spec starts_with?(binary) :: boolean
   def starts_with?(binary) do
     String.starts_with?(binary, :binary.compile_pattern(["0x"]))
   end
 
+  @doc """
+  binary contains one of specific characters
+  """
+  @spec contains?(binary) :: boolean
   def contains?(binary) do
     String.contains?(binary, :binary.compile_pattern(@invalid_binary))
   end
 
+  @doc """
+  binary is equal to one of reserved binaries, such as null or true
+  """
+  @spec reserved_string?(binary) :: boolean
   def reserved_string?(binary)
       when binary in @reserved_keys,
       do: true
 
   def reserved_string?(_), do: false
 
+  @spec reducer([tuple], binary) :: boolean
   defp reducer(list_of_functions, binary_to_test) do
     Enum.reduce_while(
       list_of_functions,
@@ -164,6 +203,7 @@ defmodule YamlEncode.Quoter do
     )
   end
 
+  @spec boolean_to_halt(boolean) :: {:halt | :cont, boolean}
   defp boolean_to_halt(true), do: {:halt, true}
   defp boolean_to_halt(false), do: {:cont, false}
 end

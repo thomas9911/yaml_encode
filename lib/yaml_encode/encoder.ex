@@ -1,8 +1,14 @@
 defmodule YamlEncode.Encoder do
+  @moduledoc """
+  YamlEncode main module
+  """
+
   import YamlEncode.Quoter, only: [quotes?: 1]
 
-  def encode(data)
-
+  @doc """
+  encodes map or a list of maps into a yaml document
+  """
+  @spec encode(map | [map]) :: {:ok, binary} | {:error, binary}
   def encode(map) when is_map(map) do
     {:ok, create_yaml(map)}
   rescue

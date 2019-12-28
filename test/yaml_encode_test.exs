@@ -1,5 +1,6 @@
 defmodule YamlEncodeTest do
   use ExUnit.Case
+  doctest YamlEncode
 
   test "empty map" do
     assert {:ok, "---\n"} == YamlEncode.encode(%{})

@@ -1,13 +1,15 @@
-defmodule YamlEncoder.MixProject do
+defmodule YamlEncode.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :yaml_encoder,
+      app: :yaml_encode,
       version: "0.1.0",
-      elixir: ">= 1.6",
+      elixir: ">= 1.6.0",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      source_url: "https://github.com/thomas9911/yaml_encode",
+      package: package(),
     ]
   end
 
@@ -19,7 +21,16 @@ defmodule YamlEncoder.MixProject do
 
   defp deps do
     [
-      {:yaml_elixir, "~> 2.4", only: :dev}
+      {:yaml_elixir, "~> 2.4", only: :dev},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
+    ]
+  end
+
+  defp package do
+    [
+      description: "Package for encoding Maps to Yaml",
+      licenses: ["Unlicense"],
+      links: %{"Github" => "https://github.com/thomas9911/yaml_encode"}
     ]
   end
 end

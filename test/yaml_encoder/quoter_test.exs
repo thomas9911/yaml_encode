@@ -1,6 +1,6 @@
-defmodule YamlEncoder.QuoterTest do
+defmodule YamlEncode.QuoterTest do
   use ExUnit.Case
-  import YamlEncoder.Quoter, only: [quotes?: 1]
+  import YamlEncode.Quoter, only: [quotes?: 1]
 
   @quotes [
     "1999-02-24",

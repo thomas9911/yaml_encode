@@ -1,13 +1,13 @@
-defmodule YamlEncoderTest do
+defmodule YamlEncodeTest do
   use ExUnit.Case
 
   test "empty map" do
-    assert {:ok, "---\n"} == YamlEncoder.encode(%{})
+    assert {:ok, "---\n"} == YamlEncode.encode(%{})
   end
 
   test "simple map" do
     map = %{"ok" => "test"}
-    assert {:ok, "---\nok: test"} == YamlEncoder.encode(map)
+    assert {:ok, "---\nok: test"} == YamlEncode.encode(map)
   end
 
   test "longer map" do
@@ -25,7 +25,7 @@ defmodule YamlEncoderTest do
               - 4
             ok: test\
             """} ==
-             YamlEncoder.encode(map)
+             YamlEncode.encode(map)
   end
 
   test "nested map" do
@@ -60,7 +60,7 @@ defmodule YamlEncoderTest do
               - 4
             ok: test\
             """} ==
-             YamlEncoder.encode(map)
+             YamlEncode.encode(map)
   end
 
   test "real world, random json" do
@@ -132,7 +132,7 @@ defmodule YamlEncoderTest do
               - quis
               - magna
               - incididunt\
-            """} == YamlEncoder.encode(map)
+            """} == YamlEncode.encode(map)
   end
 
   test "real world, kubernetes" do
@@ -186,6 +186,6 @@ defmodule YamlEncoderTest do
                 - containerPort: 80\
     """
 
-    assert {:ok, expected} == YamlEncoder.encode(map)
+    assert {:ok, expected} == YamlEncode.encode(map)
   end
 end

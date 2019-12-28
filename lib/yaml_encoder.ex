@@ -1,6 +1,6 @@
-defmodule YamlEncoder do
+defmodule YamlEncode do
   # def encode(map) when is_map(map) do
-  #   YamlEncoder.Encoder.map(map)
+  #   YamlEncode.Encoder.map(map)
   # end
-  defdelegate encode(map), to: YamlEncoder.Encoder
+  defdelegate encode(map), to: YamlEncode.Encoder
 end

@@ -1,4 +1,4 @@
-defmodule YamlEncoder.Quoter do
+defmodule YamlEncode.Quoter do
   # link: https://github.com/chyh1990/yaml-rust/blob/360a34d75bb64357cfdbc5bb706bcde9a0ecbc23/src/emitter.rs#L296
 
   @reserved_keys [

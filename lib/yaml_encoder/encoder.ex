@@ -1,5 +1,5 @@
-defmodule YamlEncoder.Encoder do
-  import YamlEncoder.Quoter, only: [quotes?: 1]
+defmodule YamlEncode.Encoder do
+  import YamlEncode.Quoter, only: [quotes?: 1]
 
   def encode(map, n \\ 0) when is_map(map) do
     result = create_yaml(map, n)

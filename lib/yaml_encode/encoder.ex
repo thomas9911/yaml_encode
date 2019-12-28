@@ -75,6 +75,10 @@ defmodule YamlEncode.Encoder do
     " #{print_quotes(value, quotes?(value))}"
   end
 
+  defp convert_to_value(nil, _) do
+    " null"
+  end
+
   defp convert_to_value(value, _) when is_number(value) or is_boolean(value) do
     " #{value}"
   end

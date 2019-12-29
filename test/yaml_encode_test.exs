@@ -105,6 +105,20 @@ defmodule YamlEncodeTest do
     assert {:error, _e} = YamlEncode.encode(maps)
   end
 
+  test "use break off length" do
+    map = %{
+      "about" =>
+        "Minim eu veniam in fugiat dolor officia velit sunt est quis amet ipsum. Et ea ex incididunt cillum laboris veniam cillum sit et commodo consequat aliqua laborum consequat. Nostrud aute sunt non irure laboris id aute aliquip voluptate nulla laboris do. Velit id occaecat elit minim occaecat ipsum amet elit est minim. Nostrud nisi incididunt minim excepteur laborum Lorem labore excepteur enim commodo. Dolore sunt laboris esse amet fugiat. Et non laboris labore fugiat."
+    }
+
+    assert {:ok,
+            """
+            ---
+            about: >
+              Minim eu veniam in fugiat dolor officia velit sunt est quis amet ipsum. Et ea ex incididunt cillum laboris veniam cillum sit et commodo consequat aliqua laborum consequat. Nostrud aute sunt non irure laboris id aute aliquip voluptate nulla laboris do. Velit id occaecat elit minim occaecat ipsum amet elit est minim. Nostrud nisi incididunt minim excepteur laborum Lorem labore excepteur enim commodo. Dolore sunt laboris esse amet fugiat. Et non laboris labore fugiat.\
+            """} == YamlEncode.encode(map, use_folded_string: true)
+  end
+
   test "real world, random json" do
     map = %{
       "_id" => "5e077e7f669d76b1422aff45",

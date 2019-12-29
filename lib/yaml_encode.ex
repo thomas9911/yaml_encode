@@ -18,6 +18,6 @@ defmodule YamlEncode do
   For more examples check [the tests](#{Mix.Project.config()[:source_url]}/blob/master/test/yaml_encode_test.exs)
 
   """
-  @spec encode(map | [map]) :: {:ok, binary} | {:error, binary}
-  defdelegate encode(map), to: YamlEncode.Encoder
+  @spec encode(map | [map], keyword) :: {:ok, binary} | {:error, binary}
+  defdelegate encode(map, opts \\ []), to: YamlEncode.Encoder
 end

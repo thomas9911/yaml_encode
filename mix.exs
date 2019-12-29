@@ -4,7 +4,7 @@ defmodule YamlEncode.MixProject do
   def project do
     [
       app: :yaml_encode,
-      version: "0.1.0",
+      version: "0.2.0",
       elixir: ">= 1.6.0",
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
